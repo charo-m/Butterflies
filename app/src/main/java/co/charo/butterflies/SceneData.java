@@ -186,7 +186,6 @@ public class SceneData {
         GLES30.glBufferData(GLES30.GL_ELEMENT_ARRAY_BUFFER, CUBE_INDICES.length * 2, skyBox.indices, GLES30.GL_STATIC_DRAW);
 
         // Unbind vao
-        //GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
         GLES30.glBindVertexArray(0);
 
         checkGLError("Geometry loaded");
@@ -338,7 +337,6 @@ public class SceneData {
     public void drawSkyCube() {
         // Use program and set uniforms
         GLES30.glUseProgram(skyEffect.program);
-        //GLES30.glUniform1i(skyEffect.uniforms.get(0).location, skyEffect.uniforms.get(0).texHandle);
         int texUnit = 0; // GL_TEXTURE0;
         GLES30.glUniform1i(skyEffect.uniforms.get(0).location, texUnit);
         GLES30.glUniformMatrix4fv(skyEffect.uniforms.get(1).location, 1, false, skyEffect.uniforms.get(1).data, 0);
@@ -357,6 +355,7 @@ public class SceneData {
         // Draw
         GLES30.glDrawElements(GLES30.GL_TRIANGLES, CUBE_INDICES.length, GLES30.GL_UNSIGNED_SHORT, 0);
 
+        // Unbind vao
         GLES30.glBindVertexArray(0);
 
         checkGLError("Draw sky");

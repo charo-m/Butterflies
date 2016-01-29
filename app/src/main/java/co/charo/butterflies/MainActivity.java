@@ -92,10 +92,11 @@ public class MainActivity extends CardboardActivity implements CardboardView.Ste
         float[] perspective = eye.getPerspective(sceneData.camera.zNear, sceneData.camera.zFar);
         Matrix.multiplyMM(modelView, 0, view, 0, sceneData.modelSky, 0);
         Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
-        //drawCube();
 
-        // Draw
+
+        // Update shader uniform
         sceneData.updateUniform("u_modelViewProjection", modelViewProjection);
+        // Draw
         sceneData.drawSkyCube();
 
     }
@@ -119,7 +120,7 @@ public class MainActivity extends CardboardActivity implements CardboardView.Ste
 
         overlayView.show3DToast("Hi there!");
 
-        // Always give user feedback.
+        // Haptic feedback
         vibrator.vibrate(50);
     }
 
